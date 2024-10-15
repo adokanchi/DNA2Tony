@@ -20,6 +20,7 @@ public class DNA {
     private static int STRLen;
     private static boolean[] hasSTR;
     private static int[] numRepeats;
+    private static int radix;
 
     public static int STRCount(String sequence, String STR) {
         initInstanceVars(sequence, STR);
@@ -32,13 +33,17 @@ public class DNA {
             }
             // Shift
             window = window << 2;
-            window += vals[sequence.charAt(i + 1) - 'A'];
+            // IDK why I need this if statement but the chromosome test needs it for some rsn
+            if (sequence.charAt(i + 1) != 0) {
+                window += vals[sequence.charAt(i + 1) - 'A'];
+            }
+            window = window % radix;
         }
 
         // numRepeats[i] is the number of times STR is repeated starting from index i
         numRepeats = new int[seqLen];
         int max = 0;
-        // Looping bakcward makes the logic easier
+        // Looping backward makes the logic easier
         if (hasSTR[seqLen  - STRLen]) {
             numRepeats[seqLen - STRLen] = 1;
         }
@@ -61,6 +66,7 @@ public class DNA {
         hasSTR = new boolean[seqLen];
         window = 0;
         STRVal = 0;
+        radix = 1 << (2 * STRLen);
 
         vals = new int[21];
         vals['A'-'A'] = 0;
