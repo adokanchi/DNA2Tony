@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="hi yet again">
+    <list default="true" id="6d822f69-9e3c-4e2b-8ee1-11779bb646bd" name="Changes" comment="hi once more">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WORK_LOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/WORK_LOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DNA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DNA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DNATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DNATest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +55,7 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.DNATest">
+  <component name="RunManager" selected="JUnit.DNATest.testLargest">
     <configuration name="DNATest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DNA 2.0 Student Code" />
       <option name="PACKAGE_NAME" value="" />
@@ -76,8 +77,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DNATest" />
         <item itemvalue="JUnit.DNATest.testLargest" />
+        <item itemvalue="JUnit.DNATest" />
       </list>
     </recent_temporary>
   </component>
@@ -122,16 +123,24 @@
       <option name="project" value="LOCAL" />
       <updated>1728965645950</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="hi once more">
+      <option name="closed" value="true" />
+      <created>1728968167048</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728968167048</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="hi" />
     <MESSAGE value="hi again" />
-    <MESSAGE value="hi once more" />
     <MESSAGE value="hi yet again" />
-    <option name="LAST_COMMIT_MESSAGE" value="hi yet again" />
+    <MESSAGE value="hi once more" />
+    <option name="LAST_COMMIT_MESSAGE" value="hi once more" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

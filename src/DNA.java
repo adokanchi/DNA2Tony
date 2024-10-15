@@ -24,11 +24,11 @@ public class DNA {
         vals['T'-'A'] = 3;
         for (int i = 0; i < STRLen; i++) {
             STRVal = STRVal << 2;
-            STRVal += vals[STR.charAt(i) - 'A'];
+            STRVal += vals[Character.toUpperCase(STR.charAt(i)) - 'A'];
         }
         for (int i = 0; i < STRLen; i++) {
             window = window << 2;
-            window += vals[sequence.charAt(i)-'A'];
+            window += vals[Character.toUpperCase(sequence.charAt(i))-'A'];
         }
 
         // hasSTR[i] == true when there is a STR starting from index i
@@ -38,7 +38,7 @@ public class DNA {
             // Shift
             window = window << 2;
             // IDK why I need this if statement but the chromosome test needs it for some rsn
-            if (sequence.charAt(i + 1) != 0) window += vals[sequence.charAt(i + 1) - 'A'];
+            if (sequence.charAt(i + 1) != 0) window += vals[Character.toUpperCase(sequence.charAt(i + 1)) - 'A'];
             window = window % (((long) 1) << (2 * STRLen));
         }
 
