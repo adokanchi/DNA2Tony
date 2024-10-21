@@ -14,8 +14,6 @@ public class DNA {
         // Initialize variables
         int seqLen = sequence.length();
         int STRLen = STR.length();
-        long STRVal = 0;
-        long window = 0;
         int[] vals = new int['t'+1];
         vals['a'] = 0;
         vals['c'] = 1;
@@ -25,37 +23,22 @@ public class DNA {
         vals['C'] = 1;
         vals['G'] = 2;
         vals['T'] = 3;
+        int STRVal = 0;
         for (int i = 0; i < STRLen; i++) {
             STRVal = STRVal << 2;
             STRVal += vals[STR.charAt(i)];
         }
+        int window = 0;
         for (int i = 0; i < STRLen; i++) {
             window = window << 2;
             window += vals[sequence.charAt(i)];
         }
 
-        // numRepeats[i] is the number of times STR is repeated ending at index i (last STR starts at i)
+        // Iterate through sequence, finding numRepeats[i] for all important values of i
+        // numRepeats[i] is the number of times STR is repeated ending at index i (i.e. the last STR starts at i)
         int[] numRepeats = new int[seqLen];
+        // max is the number of STRs in the longest string of repeats
         int max = 0;
-
-        /*
-        for (int i = 0; i <= seqLen - STRLen; i++) {
-            if (window == STRVal) {
-                if (i-STRLen >= 0) {
-                    numRepeats[i] = 1 + numRepeats[i-STRLen];
-                }
-                else {
-                    numRepeats[i] = 1;
-                }
-                if (numRepeats[i] > max) max = numRepeats[i];
-            }
-            // Shift
-            window = window << 2;
-            window += vals[sequence.charAt(i + 1)];
-            window = window % (((long) 1) << (2 * STRLen));
-        }
-         */
-
         for (int i = 0; i <= seqLen - STRLen; i++) {
             // If the hashes match
             if (window == STRVal) {
@@ -72,7 +55,7 @@ public class DNA {
                     if (i + j  + 1 < seqLen) {
                         window = window << 2;
                         window += vals[sequence.charAt(i + j + 1)];
-                        window = window % (((long) 1) << (2 * STRLen));
+                        window = window & ((1 << 2 * STRLen) - 1);
                     }
                 }
                 i += STRLen - 1;
@@ -80,9 +63,8 @@ public class DNA {
             // Shift
             window = window << 2;
             if (i + 1 < seqLen) window += vals[sequence.charAt(i + 1)];
-            window = window % (((long) 1) << (2 * STRLen));
+            window = window & ((1 << 2 * STRLen) - 1);
         }
-
         return max;
     }
 }
