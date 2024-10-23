@@ -15,11 +15,9 @@ public class DNA {
         int seqLen = sequence.length();
         int STRLen = STR.length();
         int[] vals = new int['t'+1];
-        vals['a'] = 0;
         vals['c'] = 1;
         vals['g'] = 2;
         vals['t'] = 3;
-        vals['A'] = 0;
         vals['C'] = 1;
         vals['G'] = 2;
         vals['T'] = 3;
