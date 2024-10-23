@@ -11,20 +11,13 @@
  */
 public class DNA {
     private static int window;
-    private static int STRVal;
-    private static int seqLen;
-    private static int STRLen;
     private static int[] vals;
-    private static int max;
-    private static int[] numRepeats;
-    private static int windowMask;
-    private static int numChecks;
     private static String seq;
     public static int STRCount(String sequence, String STR) {
         // Initialize variables
-        seqLen = sequence.length();
-        STRLen = STR.length();
         seq = sequence;
+        int seqLen = sequence.length();
+        int STRLen = STR.length();
         vals = new int['t'+1];
         vals['c'] = 1;
         vals['g'] = 2;
@@ -32,7 +25,7 @@ public class DNA {
         vals['C'] = 1;
         vals['G'] = 2;
         vals['T'] = 3;
-        STRVal = 0;
+        int STRVal = 0;
         for (int i = 0; i < STRLen; i++) {
             STRVal = STRVal << 2;
             STRVal += vals[STR.charAt(i)];
@@ -43,14 +36,11 @@ public class DNA {
             window += vals[sequence.charAt(i)];
         }
 
-        // Iterate through sequence, finding numRepeats[i] for all important values of i (skips after finding an STR and doesn't check last place)
-        // numRepeats[i] is the number of times STR is repeated ending at index i (i.e. the last STR starts at i)
-        numRepeats = new int[seqLen];
+        // Iterate through sequence, finding repeats of STRs (skips after finding an STR and doesn't check last place)
         // max is the number of STRs in the longest string of repeats
-        max = 0;
-        numChecks = seqLen - STRLen;
-        windowMask = (1 << 2 * STRLen) - 1;
-
+        int max = 0;
+        int numChecks = seqLen - STRLen;
+        int windowMask = (1 << 2 * STRLen) - 1;
         int counter = 0;
         for (int i = 0; i < numChecks; i++) {
             // If the hashes match
