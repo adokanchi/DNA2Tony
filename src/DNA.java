@@ -50,12 +50,14 @@ public class DNA {
         max = 0;
         numChecks = seqLen - STRLen;
         windowMask = (1 << 2 * STRLen) - 1;
-        for (int i = 0; i < STRLen; i++) {
+
+        int counter = 0;
+        for (int i = 0; i < numChecks; i++) {
             // If the hashes match
             if (window == STRVal) {
                 // Find numRepeats[i], possibly update max
-                numRepeats[i] = 1;
-                if (numRepeats[i] > max) max = numRepeats[i];
+                counter++;
+                if (counter > max) max = counter;
                 // Shift STRLen times (do STRLen - 1 shifts, one more happens at the end)
                 // All of window is overwritten, so set window to 0 once instead of repeatedly overwriting bits
                 window = 0;
@@ -64,24 +66,8 @@ public class DNA {
                 }
                 i += STRLen - 1;
             }
-            // Shift
-            shift(i + 1);
-            window = window & windowMask;
-        }
-
-        for (int i = STRLen; i < numChecks; i++) {
-            // If the hashes match
-            if (window == STRVal) {
-                // Find numRepeats[i], possibly update max
-                numRepeats[i] = 1 + numRepeats[i - STRLen];
-                if (numRepeats[i] > max) max = numRepeats[i];
-                // Shift STRLen times (do STRLen - 1 shifts, one more happens at the end)
-                // All of window is overwritten, so set window to 0 once instead of repeatedly overwriting bits
-                window = 0;
-                for (int j = 0; j < STRLen - 1; j++) {
-                    shift(i + j + 1);
-                }
-                i += STRLen - 1;
+            else {
+                counter = 0;
             }
             // Shift
             shift(i + 1);
@@ -90,9 +76,9 @@ public class DNA {
 
         // Check final window position
         if (window == STRVal) {
-            int lastNumRepeats = 1 + numRepeats[numChecks - STRLen];
-            if (lastNumRepeats > max) {
-                max = lastNumRepeats;
+            counter++;
+            if (counter > max) {
+                max = counter;
             }
         }
         return max;
