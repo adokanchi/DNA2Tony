@@ -63,7 +63,6 @@ public class DNATest {
     @Test
     @Timeout(value = 3000, unit = TimeUnit.MILLISECONDS)
     public void testChromosome22() {
-
         try {
             BufferedReader testReader = new BufferedReader(new FileReader("test_files/chromosome_22.txt"));
             char[] sequenceArr = new char[100000000];
