@@ -26,57 +26,48 @@ public class DNA {
         vals['G'] = 2;
         vals['T'] = 3;
         int STRVal = 0;
-        for (int i = 0; i < STRLen; i++) {
-            STRVal = STRVal << 2;
-            STRVal += vals[STR.charAt(i)];
-        }
         window = 0;
         for (int i = 0; i < STRLen; i++) {
-            window = window << 2;
-            window += vals[sequence.charAt(i)];
+            STRVal = (STRVal << 2) | vals[STR.charAt(i)];
+            shift(sequence.charAt(i));
         }
 
         // Iterate through sequence, finding repeats of STRs (skips after finding an STR and doesn't check last place)
         // max is the number of STRs in the longest string of repeats
         int max = 0;
-        int numChecks = seqLen - STRLen;
-        int windowMask = (1 << 2 * STRLen) - 1;
         int counter = 0;
-        for (int i = 0; i < numChecks; i++) {
+        int windowMask = (1 << 2 * STRLen) - 1;
+        int lastIndex = seqLen - STRLen;
+        for (int i = 0; i < lastIndex; i++) {
             // If the hashes match
             if (window == STRVal) {
-                // Find numRepeats[i], possibly update max
-                counter++;
-                if (counter > max) max = counter;
-                // Shift STRLen times (do STRLen - 1 shifts, one more happens at the end)
+                if (++counter > max) max = counter;
+                // Shift STRLen times
                 // All of window is overwritten, so set window to 0 once instead of repeatedly overwriting bits
                 window = 0;
-                for (int j = 0; j < STRLen - 1; j++) {
+                for (int j = 0; j < STRLen; j++) {
                     shift(i + j + 1);
                 }
+                // - 1 because i is incremented in the loop
                 i += STRLen - 1;
             }
             else {
                 counter = 0;
+                // Shift
+                shift(i + 1);
+                window = window & windowMask;
             }
-            // Shift
-            shift(i + 1);
-            window = window & windowMask;
         }
 
         // Check final window position
-        if (window == STRVal) {
-            counter++;
-            if (counter > max) {
-                max = counter;
-            }
+        if (window == STRVal && ++counter > max) {
+            max = counter;
         }
         return max;
     }
 
     // Shifts window to add the character at index i
     public static void shift(int i) {
-        window = window << 2;
-        window += vals[seq.charAt(i)];
+        window = (window << 2) | vals[seq.charAt(i)];
     }
 }
